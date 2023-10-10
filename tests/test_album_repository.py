@@ -25,7 +25,7 @@ A new album is added to list of albums
 def test_all(db_connection):
     db_connection.seed("seeds/record_store.sql")
     repository = AlbumRepository(db_connection)
-    album = Album(None, 'New Album', 9999, 5)
+    album = Album(None, 'New Album', 9999, 3)
     repository.create(album)
     assert repository.all() == [
         Album(1, 'Californication',1999, 1),
@@ -33,5 +33,5 @@ def test_all(db_connection):
         Album(3, 'In Utero', 1993, 2),
         Album(4, 'Ten', 1991, 3),
         Album(5, 'By the Way', 2002, 1),
-        Album(6, 'New Album', 9999, 5)
+        Album(6, 'New Album', 9999, 3)
     ]

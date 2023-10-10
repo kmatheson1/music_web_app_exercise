@@ -15,6 +15,13 @@ POST albums/
 
 GET albums/
 
+GET artists/
+
+POST artists/
+    name: str
+    genre: str
+
+
 ```
 
 ## 2. Create Examples as Tests
@@ -63,6 +70,40 @@ GET albums/
     Album(5, 'By the Way', 2002, 1)
     """
 
+# Example 3
+    # GET /artists
+    # Expected response: (200 OK)
+    """
+    Red Hot Chili Peppers, Nirvanna, Pearl Jam
+    """
+
+# Example 4
+    # POST /artists
+    #     name: Foo Fighters
+    #     genre: Rock
+    # Expected response: (200 OK)
+    """(no content)
+    """
+
+    # GET /artists
+    # Expected response: (200 OK)
+    """
+    Red Hot Chili Peppers, Nirvanna, Pearl Jam, Foo Fighters
+    """
+
+    # EXAMPLE 2
+    # POST /albums
+    # Expected response: (400 Bad Request)
+    """
+    Name, Genre must be submitted
+    """
+
+    # GET /albums
+    # Expected response: (200 OK)
+    """
+    Red Hot Chili Peppers, Nirvanna, Pearl Jam
+    """
+
 ```
 
 ## 3. Test-drive the Route
@@ -72,26 +113,4 @@ GET albums/
 Here's an example for you to start with:
 
 ```python
-"""
-GET /home
-  Expected response (200 OK):
-  "This is my home page!"
-"""
-def test_get_home(web_client):
-    response = web_client.get('/home')
-    assert response.status_code == 200
-    assert response.data.decode('utf-8') == 'This is my home page!'
-
-"""
-POST /submit
-  Parameters:
-    name: Leo
-    message: Hello world
-  Expected response (200 OK):
-  "Thanks Leo, you sent this message: "Hello world""
-"""
-def test_post_submit(web_client):
-    response = web_client.post('/submit', data={'name': 'Leo', 'message': 'Hello world'})
-    assert response.status_code == 200
-    assert response.data.decode('utf-8') == 'Thanks Leo, you sent this message: "Hello world"'
 ```
