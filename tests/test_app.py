@@ -38,14 +38,14 @@ def test_post_albums_with_no_data(db_connection, web_client):
             "Album(4, Ten, 1991, 3)\n" \
             "Album(5, By the Way, 2002, 1)"
 
-def test_get_albums(db_connection, web_client):
+def test_get_artists(db_connection, web_client):
     db_connection.seed("seeds/record_store.sql")
     response = web_client.get('/artists')
     assert response.status_code == 200
     assert response.data.decode('utf-8') == "" \
         "Red Hot Chili Peppers, Nirvana, Pearl Jam"
     
-def test_post_albums(db_connection, web_client):
+def test_post_artists(db_connection, web_client):
     db_connection.seed("seeds/record_store.sql")
     response = web_client.post('/artists', data={
         'name': 'Foo Fighters',
@@ -59,7 +59,7 @@ def test_post_albums(db_connection, web_client):
     assert get_response.data.decode('utf-8') == "" \
         "Red Hot Chili Peppers, Nirvana, Pearl Jam, Foo Fighters"
 
-def test_post_albums_no_data(db_connection, web_client):
+def test_post_artists_no_data(db_connection, web_client):
     db_connection.seed("seeds/record_store.sql")
     response = web_client.post('/artists')
     assert response.status_code == 400
